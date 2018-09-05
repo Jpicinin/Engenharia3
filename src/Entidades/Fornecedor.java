@@ -166,7 +166,7 @@ public class Fornecedor
         sql = sql.replace("$6", getContato());
         sql = sql.replace("$7", getCelular());
 
-        return Banco.Banco.con.manipular(sql);
+        return Banco.Banco.getConexao().manipular(sql);
     }
 
     public boolean Alterar(String sql)
@@ -181,14 +181,14 @@ public class Fornecedor
         sql = sql.replace("$6", getContato());
         sql = sql.replace("$7", getCelular());
 
-        return Banco.Banco.con.manipular(sql);
+        return Banco.Banco.getConexao().manipular(sql);
     }
 
     public boolean Apagar(String sql)
     {
         sql = "DELETE FROM fornecedor WHERE for_codigo = " + getCodigo();
 
-        return Banco.Banco.con.manipular(sql);
+        return Banco.Banco.getConexao().manipular(sql);
     }
 
     public ObservableList<Fornecedor> Buscar(String filtro, String busca)
@@ -196,7 +196,7 @@ public class Fornecedor
         ObservableList<Fornecedor> obj = FXCollections.observableArrayList();
 
         //ResultSet rs = Banco.BD.getCon().consultar("SELECT * FROM fornecedor WHERE for_nome LIKE '" + filtro +"%"+ "'");
-        ResultSet rs = Banco.Banco.con.consultar("SELECT * FROM fornecedor WHERE " + busca + " LIKE '" + filtro + "%" + "'");
+        ResultSet rs = Banco.Banco.getConexao().consultar("SELECT * FROM fornecedor WHERE " + busca + " LIKE '" + filtro + "%" + "'");
 
         try
         {
@@ -216,7 +216,7 @@ public class Fornecedor
     {
         ObservableList<Fornecedor> obj = FXCollections.observableArrayList();
 
-        ResultSet rs = Banco.Banco.con.consultar("SELECT * FROM fornecedor");
+        ResultSet rs = Banco.Banco.getConexao().consultar("SELECT * FROM fornecedor");
 
         try
         {

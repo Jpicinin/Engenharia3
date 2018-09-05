@@ -109,7 +109,7 @@ public class TelaFornecedorController implements Initializable
         MaskFieldUtil.foneField(tf_celular);
         MaskFieldUtil.onlyAlfaNumericValue(tf_contato);
 
-        tv_table.setItems(new CtrFornecedor().BuscarTodos());
+        tv_table.setItems(CtrFornecedor.BuscarTodos());
     }
 
     private void Inicial()
@@ -171,12 +171,12 @@ public class TelaFornecedorController implements Initializable
                 if (ValidaCNPJ.isCNPJ(tf_cnpj.getText()))
                 {
                     //codigo, nome, cnpf, email, fone, site, contato, celular
-                    if (new CtrFornecedor().Salvar(tf_nome.getText(), tf_cnpj.getText(), tf_email.getText(), tf_fone.getText(),
+                    if (CtrFornecedor.Salvar(tf_nome.getText(), tf_cnpj.getText(), tf_email.getText(), tf_fone.getText(),
                             tf_site.getText(), tf_contato.getText(), tf_celular.getText()))
                     {
                         Limpar();
                         Inicial();
-                        tv_table.setItems(new CtrFornecedor().BuscarTodos());
+                        tv_table.setItems(CtrFornecedor.BuscarTodos());
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setContentText("Salvo com sucesso!!!");
                         alert.showAndWait();
@@ -211,11 +211,11 @@ public class TelaFornecedorController implements Initializable
 
             if (ValidaCNPJ.isCNPJ(tf_cnpj.getText()))
             {
-                if (new CtrFornecedor().Alterar(tf_codigo.getText(), tf_nome.getText(), tf_cnpj.getText(), tf_email.getText(), tf_fone.getText(), tf_site.getText(), tf_contato.getText(), tf_celular.getText()))
+                if (CtrFornecedor.Alterar(tf_codigo.getText(), tf_nome.getText(), tf_cnpj.getText(), tf_email.getText(), tf_fone.getText(), tf_site.getText(), tf_contato.getText(), tf_celular.getText()))
                 {
                     Limpar();
                     Inicial();
-                    tv_table.setItems(new CtrFornecedor().BuscarTodos());
+                    tv_table.setItems(CtrFornecedor.BuscarTodos());
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("Alterado com sucesso!!!.");
                     alert.showAndWait();
@@ -242,11 +242,11 @@ public class TelaFornecedorController implements Initializable
     @FXML
     private void ClickApagar(ActionEvent event)
     {
-        if (new CtrFornecedor().Apagar(s_fornecedor.getCodigo()))
+        if (CtrFornecedor.Apagar(s_fornecedor.getCodigo()))
         {
             Limpar();
             Inicial();
-            tv_table.setItems(new CtrFornecedor().BuscarTodos());
+            tv_table.setItems(CtrFornecedor.BuscarTodos());
         } else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -283,7 +283,7 @@ public class TelaFornecedorController implements Initializable
         String busca;
         if (tf_buscar.getText().isEmpty())
         {
-            tv_table.setItems(new CtrFornecedor().BuscarTodos());
+            tv_table.setItems(CtrFornecedor.BuscarTodos());
         } else
         {
             tv_table.getItems().clear();
@@ -294,7 +294,7 @@ public class TelaFornecedorController implements Initializable
             {
                 busca = "for_site";
             }
-            tv_table.setItems(new CtrFornecedor().Buscar(tf_buscar.getText(), busca));
+            tv_table.setItems(CtrFornecedor.Buscar(tf_buscar.getText(), busca));
         }
     }
 

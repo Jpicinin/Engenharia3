@@ -46,7 +46,7 @@ public class Servico
     {
         String sql = "select * from servico where serv_cod = "+codigo_servico;
         ResultSet rs = null;
-        rs = Banco.Banco.con.consultar(sql);
+        rs = Banco.Banco.getConexao().consultar(sql);
         while(rs.next())
         {
             nome = rs.getString("ser_nome");
@@ -89,7 +89,7 @@ public class Servico
         if(!f.isEmpty())
             sql +=" where ser_nome like'%"+f+"%'";
         //System.out.println(sql);
-        ResultSet rs = Banco.Banco.con.consultar(sql);
+        ResultSet rs = Banco.Banco.getConexao().consultar(sql);
         ArrayList<Servico> a = new ArrayList<>();
         while(rs.next())
         {

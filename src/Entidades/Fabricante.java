@@ -71,7 +71,7 @@ public class Fabricante
         {
             sql += " fab_cod = " + codigo;
         }
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while (rs.next())
@@ -94,7 +94,7 @@ public class Fabricante
         {
             sql += " where fab_cod = " + codigo;
         }
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while (rs.next())

@@ -174,13 +174,13 @@ public class Orcamento
         String sqlb1;
         try
         {
-            Banco.con.getConnection().setAutoCommit(false);
+            Banco.getConexao().getConnection().setAutoCommit(false);
             String sql = "insert into orcamento(cli_cod, dt_orcamento, dt_validade, valor_tot, obsformapg, usr_id) VALUES('$1', '$2', '$3', '$4', '$5', '$6')";
             sql = sql.replace("$1", Integer.toString(cliente.getCodigo())).replace("$2", dtorcamento.toString()).replace("$3", dtvalidade.toString())
                     .replace("$4", Double.toString(total)).replace("$5", obsformapagamento).replace("$6", Integer.toString(usuarioid.getCodigo()));
 
-            flag = flag && Banco.con.manipular(sql);
-            String cOrcamento = Integer.toString(Banco.con.getMaxPK("orcamento", "orc_cod"));
+            flag = flag && Banco.getConexao().manipular(sql);
+            String cOrcamento = Integer.toString(Banco.getConexao().getMaxPK("orcamento", "orc_cod"));
 
             //System.out.println(sql);
             
@@ -192,7 +192,7 @@ public class Orcamento
                         .replace("$3", Double.toString(produtosOrcamento.get(i).getValor()))
                         .replace("$4", Double.toString(produtosOrcamento.get(i).getQtd()));
                 System.out.println(sqlb1);
-                flag = flag && Banco.con.manipular(sqlb1);
+                flag = flag && Banco.getConexao().manipular(sqlb1);
             }
             
             for (int i = 0; i < servicosOrcamento.size(); i++)
@@ -203,18 +203,18 @@ public class Orcamento
                         .replace("$3", Double.toString(servicosOrcamento.get(i).getValor()))
                         .replace("$4", Double.toString(servicosOrcamento.get(i).getQtd()));
                 System.out.println(sqlb1);
-                flag = flag && Banco.con.manipular(sqlb1);
+                flag = flag && Banco.getConexao().manipular(sqlb1);
             }
             if(flag)
-                Banco.con.getConnection().commit();
+                Banco.getConexao().getConnection().commit();
             else
-                Banco.con.getConnection().rollback();
+                Banco.getConexao().getConnection().rollback();
         }catch(Exception ex)
         {
-            Banco.con.getConnection().rollback();
+            Banco.getConexao().getConnection().rollback();
             
         }
-        Banco.con.getConnection().setAutoCommit(true);
+        Banco.getConexao().getConnection().setAutoCommit(true);
         return flag;
     }
     public boolean remove()
@@ -225,23 +225,23 @@ public class Orcamento
         String sql3 = "delete from orcamento where orc_cod = "+codigo;
         try
         {
-            Banco.con.getConnection().setAutoCommit(false);
-            flag = Banco.con.manipular(sql1) && Banco.con.manipular(sql2) && Banco.con.manipular(sql3);
+            Banco.getConexao().getConnection().setAutoCommit(false);
+            flag = Banco.getConexao().manipular(sql1) && Banco.getConexao().manipular(sql2) && Banco.getConexao().manipular(sql3);
             if(flag)
             {
-                Banco.con.getConnection().commit();
+                Banco.getConexao().getConnection().commit();
             }
             else
-                Banco.con.getConnection().rollback();
-            Banco.con.getConnection().setAutoCommit(true);
+                Banco.getConexao().getConnection().rollback();
+            Banco.getConexao().getConnection().setAutoCommit(true);
         } 
         catch (SQLException ex)
         {
             flag = false;
             try
             {
-                Banco.con.getConnection().rollback();
-                Banco.con.getConnection().setAutoCommit(true);
+                Banco.getConexao().getConnection().rollback();
+                Banco.getConexao().getConnection().setAutoCommit(true);
             } catch (SQLException ex1)
             {
                 System.out.println("Falha Critica Rollback Incapacitado");
@@ -254,7 +254,7 @@ public class Orcamento
         String sql = "insert into orcamento(cli_cod, dt_orcamento, dt_validade, valor_tot, obsformapg, usr_id) VALUES('$1', '$2', '$3', '$4', '$5', '$6')";
             sql = sql.replace("$1", Integer.toString(cliente.getCodigo())).replace("$2", dtorcamento.toString()).replace("$3", dtvalidade.toString())
                     .replace("$4", Double.toString(total)).replace("$5", obsformapagamento).replace("$6", Integer.toString(usuarioid.getCodigo()));
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
     public ArrayList<Object> get(String filtro)
     {
@@ -262,7 +262,7 @@ public class Orcamento
       
         String sql = "select * from orcamento";
         ResultSet rs = null;
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         
         try
         {
@@ -303,7 +303,7 @@ public class Orcamento
             }
         }
         ResultSet rs = null;
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         
         try
         {
@@ -324,12 +324,12 @@ public class Orcamento
         String sqlb1;
         try
         {
-            Banco.con.getConnection().setAutoCommit(false);
+            Banco.getConexao().getConnection().setAutoCommit(false);
             String sql = "update orcamento set cli_cod = '$1', dt_orcamento = '$2', dt_validade = '$3', valor_tot = '$4', obsformapg = '$5', usr_id = '$6' WHERE orc_cod = "+codigo;
             sql = sql.replace("$1", Integer.toString(cliente.getCodigo())).replace("$2", dtorcamento.toString()).replace("$3", dtvalidade.toString())
                     .replace("$4", Double.toString(total)).replace("$5", obsformapagamento).replace("$6", Integer.toString(usuarioid.getCodigo()));
 
-            flag = flag && Banco.con.manipular(sql);
+            flag = flag && Banco.getConexao().manipular(sql);
             //String cOrcamento = Integer.toString(Banco.con.getMaxPK("orcamento", "orc_cod"));
 
             //System.out.println(sql);
@@ -353,8 +353,7 @@ public class Orcamento
                         .replace("$4", Double.toString(produtosOrcamento.get(i).getQtd()));
                 }
                 
-                System.out.println(sqlb1);
-                flag = flag && Banco.con.manipular(sqlb1);
+                flag = flag && Banco.getConexao().manipular(sqlb1);
             }
             
             for (int i = 0; i < servicosOrcamento.size(); i++)
@@ -376,19 +375,18 @@ public class Orcamento
                         .replace("$4", Double.toString(servicosOrcamento.get(i).getQtd()));
                 }
                 
-                System.out.println(sqlb1);
-                flag = flag && Banco.con.manipular(sqlb1);
+                flag = flag && Banco.getConexao().manipular(sqlb1);
             }
             if(flag)
-                Banco.con.getConnection().commit();
+                Banco.getConexao().getConnection().commit();
             else
-                Banco.con.getConnection().rollback();
+                Banco.getConexao().getConnection().rollback();
         }catch(Exception ex)
         {
-            Banco.con.getConnection().rollback();
+            Banco.getConexao().getConnection().rollback();
             
         }
-        Banco.con.getConnection().setAutoCommit(true);
+        Banco.getConexao().getConnection().setAutoCommit(true);
         return flag;
     }
 
@@ -416,7 +414,7 @@ public class Orcamento
                 sql += " orcamento.dt_orcamento BETWEEN '"+inicio.toString()+"' AND '"+fim.toString()+"'";
             }
         } 
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         
         try
         {

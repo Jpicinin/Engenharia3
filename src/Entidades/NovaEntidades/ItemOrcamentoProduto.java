@@ -107,7 +107,7 @@ public class ItemOrcamentoProduto
     {
         ArrayList<ItemOrcamentoProduto> a = new ArrayList<>();
         String sql = "select * from itensorpro where orc_cod = "+codigo_orcamento;
-        ResultSet rs = Banco.con.consultar(sql);
+        ResultSet rs = Banco.getConexao().consultar(sql);
         try
         {
             while(rs.next())
@@ -125,7 +125,7 @@ public class ItemOrcamentoProduto
     {
         Produto p = null;
         String sql = "select *from produto where prod_cod = "+cod;
-        ResultSet rs = Banco.con.consultar(sql);
+        ResultSet rs = Banco.getConexao().consultar(sql);
         try
         {
             while(rs.next())
@@ -150,7 +150,7 @@ public class ItemOrcamentoProduto
     public boolean remove()
     {
         String sql = "delete from itensorpro where orc_cod = "+codigo_orcamento+" and prod_cod = "+produto.getCodigo();
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
     
 }

@@ -101,7 +101,7 @@ public class ItemOrcamentoServico
     {
         ArrayList<ItemOrcamentoServico> a = new ArrayList<>();
         String sql = "select * from itensorser where orc_cod = "+codigo_orcamento;
-        ResultSet rs = Banco.con.consultar(sql);
+        ResultSet rs = Banco.getConexao().consultar(sql);
         try
         {
             while(rs.next())
@@ -120,7 +120,7 @@ public class ItemOrcamentoServico
     public boolean remove()
     {
         String sql = "delete from itensorser where orc_cod = "+codigo_orcamento+" and serv_cod = "+servico.getCodigo_servico();
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
 
    

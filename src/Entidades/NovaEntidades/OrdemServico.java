@@ -148,14 +148,14 @@ public class OrdemServico
                 .replace("$6", valor_total.toString())
                 .replace("$7", funcionario.getCodigo().toString());
         System.out.println(sql);
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
     public static ArrayList<OrdemServico> getAll(String filtro)
     {
         ArrayList<OrdemServico> a = new ArrayList<>();
         String sql = "select * from ordemservico";
         ResultSet rs = null;
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while(rs.next())            

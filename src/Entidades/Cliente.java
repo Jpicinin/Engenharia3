@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import Banco.Banco;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Cliente
 {
@@ -24,7 +22,7 @@ public class Cliente
     private String cidade;
     private String bairro;
     private Date dtCadastro;
-
+    private ArrayList<Veiculo> veiculos;
     public Cliente()
     {
     }
@@ -79,12 +77,48 @@ public class Cliente
         this.cep = cep;
         this.dtCadastro = dtCadastro;
     }
+////////////////////////novos
+    public Cliente(Integer codigo, String nome, String cpf, String rg, String telefone, String email, String endereco, String cep, String pais, String estado, String cidade, String bairro, Date dtCadastro, ArrayList<Veiculo> veiculos)
+    {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.pais = pais;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.dtCadastro = dtCadastro;
+        this.veiculos = veiculos;
+    }
 
+    public Cliente(String nome, String cpf, String rg, String telefone, String email, String endereco, String cep, String pais, String estado, String cidade, String bairro, Date dtCadastro, ArrayList<Veiculo> veiculos)
+    {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.pais = pais;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.dtCadastro = dtCadastro;
+        this.veiculos = veiculos;
+    }
+    
+////////////////////////////////////
     public Cliente(int codigo_cliente)
     {
         Cliente c = null;
         String sql = "select * from cliente where cli_cod = "+codigo_cliente;
-        ResultSet rs = Banco.con.consultar(sql);
+        ResultSet rs = Banco.getConexao().consultar(sql);
         try
         {
             while(rs.next())
@@ -250,13 +284,13 @@ public class Cliente
                 .replace("$8", dtCadastro.toString())
                 .replace("$9", cep.replace("-", ""));
         //System.out.println(sql);
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
 
     public boolean Remove()
     {
         String sql = "delete from cliente where cli_cod = " + codigo;
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
 
     public boolean Altera()
@@ -270,7 +304,7 @@ public class Cliente
                 .replace("$8", dtCadastro.toString())
                 .replace("$9", cep);
         System.out.println(sql);
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
 
     public ArrayList<Object> Get()
@@ -282,7 +316,7 @@ public class Cliente
         {
             sql += " Where cli_nome like '%" + nome + "%'";
         }
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while (rs.next())
@@ -313,7 +347,7 @@ public class Cliente
                 sql += " Where cli_rg = '" + f1 + "'";
             }
         }
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while (rs.next())
@@ -332,7 +366,7 @@ public class Cliente
     {
         Cliente c = null;
         String sql = "select * from cliente where cli_cpf = '"+Cpf+"'";
-        ResultSet rs = Banco.con.consultar(sql);
+        ResultSet rs = Banco.getConexao().consultar(sql);
         while(rs.next())
         {
             c = new Cliente(rs.getInt("cli_cod"), rs.getString("cli_nome"),

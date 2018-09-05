@@ -17,6 +17,10 @@ import javafx.scene.control.TableView;
 public class CtrOrdemServico
 {
 
+    private CtrOrdemServico()
+    {
+    }
+
     public static boolean Adiciona(int cli_cod, Object funcionario, String parcelas, double total, LocalDate dtos, LocalDate dtfechamento, Object orcamento)
     {
         OrdemServico os = new OrdemServico((Orcamento)orcamento, new Cliente(cli_cod), (Funcionario) funcionario, Date.valueOf(dtos), Date.valueOf(dtfechamento), Integer.parseInt(parcelas), total);

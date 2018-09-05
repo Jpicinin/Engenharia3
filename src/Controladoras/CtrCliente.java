@@ -11,10 +11,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +19,10 @@ import java.util.logging.Logger;
  */
 public class CtrCliente
 {
+    private CtrCliente()
+    {
+        
+    }
 
     public static void GetCliente(JFXTextField tnome, JFXTextField tcpf, JFXTextField trg, JFXTextField ttelefone, JFXTextField temail, JFXTextField tendereco, JFXTextField tcep, JFXComboBox<String> cbpais, JFXComboBox<String> cbestado, JFXComboBox<String> cbcidade, JFXComboBox<String> cbbairro, JFXDatePicker dtcadastro, Object o)
     {
@@ -62,10 +63,7 @@ public class CtrCliente
         return c != null;
     }
 
-    private CtrCliente()
-    {
-
-    }
+    
 
     public static boolean SalvarCliente(String nome, String cpf, String rg, String telefone, String email, String endereco, String cep, String pais, String estado, String cidade, String bairro, Date dtCadastro)
     {

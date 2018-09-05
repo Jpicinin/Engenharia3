@@ -159,13 +159,13 @@ public class Parametrizacao
 
     public boolean inicia() throws SQLException
     {
-        ResultSet rs = Banco.Banco.con.consultar("SELECT * FROM parametrizacao");
+        ResultSet rs = Banco.Banco.getConexao().consultar("SELECT * FROM parametrizacao");
         return (rs != null && rs.next());
     }
 
     public Parametrizacao carrega() throws SQLException, IOException
     {
-        ResultSet rs = Banco.Banco.con.consultar("SELECT * FROM parametrizacao");
+        ResultSet rs = Banco.Banco.getConexao().consultar("SELECT * FROM parametrizacao");
         rs.next();
         return new Parametrizacao(rs.getString("NomeFantasia"), rs.getString("RazaoSocial"), ImageIO.read(new ByteArrayInputStream(rs.getBytes("logogrande"))), ImageIO.read(new ByteArrayInputStream(rs.getBytes("logopequeno"))), rs.getString("Endereco"), rs.getString("CorFundo"), rs.getString("TipoFonte"), rs.getString("Site"), rs.getString("Email"), rs.getString("Telefone"));
     }
@@ -181,9 +181,9 @@ public class Parametrizacao
         Connection connection = null;
         PreparedStatement statement = null;
 
-        connection = Banco.Banco.con.getConnection();
+        connection = Banco.Banco.getConexao().getConnection();
 
-        Banco.Banco.con.consultar("delete from parametrizacao");
+        Banco.Banco.getConexao().consultar("delete from parametrizacao");
         statement = connection.prepareStatement("INSERT INTO parametrizacao(nomefantasia,RazaoSocial,LogoGrande,LogoPequeno,Endereco,CorFundo,TipoFonte,Site,Email,Telefone) VALUES(?,?,?,?,?,?,?,?,?,?)");
         statement.setString(1, getNomeFantasia());
         statement.setString(2, getRazaoSocial());
@@ -219,7 +219,7 @@ public class Parametrizacao
         sql = sql.replace("$6", getSite());
         sql = sql.replace("$7", getEmail());
         sql = sql.replace("$8", getFone());
-        return Banco.Banco.con.manipular(sql);
+        return Banco.Banco.getConexao().manipular(sql);
         }
 
         return true;

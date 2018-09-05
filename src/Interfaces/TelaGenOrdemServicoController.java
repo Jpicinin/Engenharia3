@@ -232,7 +232,7 @@ public class TelaGenOrdemServicoController implements Initializable
                 else
                 {
                     Alert a = new Alert(Alert.AlertType.ERROR);
-                    a.setContentText("Falha ao Gerar Ordem de Serviço!!!\n"+Banco.con.getMensagemErro());
+                    a.setContentText("Falha ao Gerar Ordem de Serviço!!!\n"+Banco.getConexao().getMensagemErro());
                     a.show();
                 }
             }

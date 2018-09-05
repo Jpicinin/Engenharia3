@@ -203,7 +203,7 @@ public class TelaGenOrcamentoController implements Initializable
                 else
                 {
                     a = new Alert(Alert.AlertType.ERROR);
-                    a.setContentText("Não Foi Possível Apagar Este Item!!!\n"+Banco.con.getMensagemErro());
+                    a.setContentText("Não Foi Possível Apagar Este Item!!!\n"+Banco.getConexao().getMensagemErro());
                     a.show();
                 }
             }
@@ -260,7 +260,7 @@ public class TelaGenOrcamentoController implements Initializable
                 else
                 {
                     a = new Alert(Alert.AlertType.ERROR);
-                    a.setContentText("Não Foi Possível Apagar Este Item!!!\n"+Banco.con.getMensagemErro());
+                    a.setContentText("Não Foi Possível Apagar Este Item!!!\n"+Banco.getConexao().getMensagemErro());
                     a.show();
                 }
             }
@@ -323,7 +323,7 @@ public class TelaGenOrcamentoController implements Initializable
                 catch(Exception ex)
                 {
                     Alert a = new Alert(Alert.AlertType.ERROR);
-                    a.setContentText(ex.getMessage()+"\n"+Banco.con.getMensagemErro());
+                    a.setContentText(ex.getMessage()+"\n"+Banco.getConexao().getMensagemErro());
                     a.show();
                 }
             }

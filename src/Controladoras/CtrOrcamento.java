@@ -12,7 +12,6 @@ import Entidades.NovaEntidades.ItemOrcamentoServico;
 import Entidades.NovaEntidades.Orcamento;
 import Entidades.NovaEntidades.Servico;
 import Entidades.Produto;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -20,8 +19,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +31,10 @@ import javafx.scene.control.TableView;
  */
 public class CtrOrcamento
 {
+
+    private CtrOrcamento()
+    {
+    }
 
     
 

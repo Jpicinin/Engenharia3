@@ -86,7 +86,7 @@ public class Tipo
         {
             sql += " tip_cod = " + codigo;
         }
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while (rs.next())
@@ -109,7 +109,7 @@ public class Tipo
         {
             sql += " where tip_cod = " + codigo;
         }
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while (rs.next())

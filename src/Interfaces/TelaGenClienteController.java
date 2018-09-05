@@ -270,7 +270,7 @@ public class TelaGenClienteController implements Initializable
             } else
             {
                 Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setContentText(Banco.con.getMensagemErro());
+                a.setContentText(Banco.getConexao().getMensagemErro());
                 a.show();
             }
 

@@ -3,10 +3,15 @@ package Banco;
 public class Banco
 {
 
-    static public Conexao con = null;
+    static private Conexao con = null;
 
     private Banco()
     {
+    }
+
+    public static Conexao getConexao()
+    {
+        return con;
     }
 
     static public boolean conectar()

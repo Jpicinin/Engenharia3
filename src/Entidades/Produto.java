@@ -17,15 +17,15 @@ public class Produto
     private Tipo tipo;
     private Integer quantidade;
     private String obs;
-    private String lote;
+    private String lote;//apagar posteriormente
+    private Lote lote2;
 
-    public Produto(Integer codigo, String nome, Double preco, Object fabricante/*, Object fornecedor*/, Object tipo, Integer quantidade, String obs, String lote)
+    public Produto(Integer codigo, String nome, Double preco, Object fabricante, Object tipo, Integer quantidade, String obs, String lote)
     {
         this.codigo = codigo;
         this.nome = nome;
         this.preco = preco;
         this.fabricante = (Fabricante) fabricante;
-        //this.fornecedor = (Fornecedor) fornecedor;
         this.tipo = (Tipo) tipo;
         this.quantidade = quantidade;
         this.obs = obs;
@@ -153,8 +153,7 @@ public class Produto
                 .replace("$6", preco.toString())
                 .replace("$7", obs)
                 .replace("$8", nome);
-        System.out.println(sql);
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
 
     public boolean Altera()
@@ -165,13 +164,13 @@ public class Produto
         sql = sql.replace("$2", tipo.getCodigo().toString()).replace("$3", fabricante.getCodigo().toString()).replace("$4",
                 quantidade.toString()).replace("$5", lote).replace("$6", preco.toString()).replace("$7", obs).replace("$8", nome);
         //System.out.println(sql);
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
 
     public boolean Remove()
     {
         String sql = "delete from produto where prod_cod = " + codigo;
-        return Banco.con.manipular(sql);
+        return Banco.getConexao().manipular(sql);
     }
 
     public ArrayList<Object> Get(String filtro)
@@ -183,7 +182,7 @@ public class Produto
         {
             sql += " Where " + filtro;
         }
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while (rs.next())
@@ -220,7 +219,7 @@ public class Produto
             }
         }
         //System.out.println(sql);
-        rs = Banco.con.consultar(sql);
+        rs = Banco.getConexao().consultar(sql);
         try
         {
             while (rs.next())
